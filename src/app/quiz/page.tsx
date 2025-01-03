@@ -2,18 +2,20 @@
 
 import { useEffect, useState } from 'react'
 import { mockQuiz } from './mock-data'
-import useLocalStorage from '@/lib/hooks/useLocalStorage'
+import useIndexedDB from '@/lib/hooks/useIndexedDB'
 
 export default function QuizPage() {
   const [isHydrated, setIsHydrated] = useState(false)
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] =
-    useLocalStorage<number>('currentQuestionIndex', 0)
-  const [answers, setAnswers] = useLocalStorage<{ [id: number]: string }>(
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useIndexedDB<number>(
+    'currentQuestionIndex',
+    0
+  )
+  const [answers, setAnswers] = useIndexedDB<{ [id: number]: string }>(
     'quizAnswers',
     {}
   )
-  const [isQuizComplete, setIsQuizComplete] = useLocalStorage<boolean>(
+  const [isQuizComplete, setIsQuizComplete] = useIndexedDB<boolean>(
     'isQuizComplete',
     false
   )
